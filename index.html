@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-decoration: none;
+            font-family: "Roboto", sans-serif;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1920px;
+            margin: 0 auto;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        header button {
+            padding: 10px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            background: none;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .filter .container {
+            display: flex;
+        }
+
+        .add {
+            background-color: #6495ed;
+        }
+
+        .archives {
+            background-color: #005780;
+        }
+
+        .trash {
+            background-color: red;
+        }
+
+        .filterDetails {
+            display: flex;
+            align-items: center;
+        }
+
+        .filterDetails.noon {
+            display: none;
+        }
+
+        .filterDetails li {
+            background-color: black;
+            color: white;
+            margin: 0 30px;
+            padding: 10px 30px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            border-radius: 88% 12% 83% 17% / 15% 79% 21% 85%;
+        }
+
+        .tune {
+            cursor: pointer;
+            padding: 30px 0;
+            font-size: 40px;
+        }
+
+        /*  maiiiiiiiiiiiin  */
+
+        main {
+            padding: 50px 0;
+        }
+
+        .user {
+            width: 250px;
+            height: 400px;
+        }
+
+        .users {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-template-rows: auto auto;
+            grid-gap: 10px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+                rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: #eee;
+            padding: 10px;
+        }
+
+        .description {
+            height: 250px;
+            font-weight: bold;
+            border-radius: 10px;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+            background-color: #eee;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+                rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        }
+
+        .name {
+            display: flex;
+            gap: 5px;
+        }
+
+        .user img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .kindOfWork {
+            color: #656666;
+            font-size: 20px;
+        }
+
+        .user .descPara {
+            font-weight: 300;
+            margin: 15px 0;
+            line-height: 28px;
+        }
+
+        .buttons {
+            position: absolute;
+            bottom: -50px;
+            left: 10%;
+            width: 80%;
+            display: flex;
+            justify-content: space-around;
+            transition: all 0.5s;
+        }
+
+        .buttons span {
+            width: 50px;
+            height: 50px;
+            background-color: #eee;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+                rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+            transition: all 0.5s;
+        }
+
+        .buttons span:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .user:hover .buttons {
+            bottom: 10px;
+        }
+
+        .kind {
+            color: red;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .dash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 200000;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .noon {
+            display: none;
+        }
+
+
+        .dashChild form {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            border-radius: 100% 0% 91% 9% / 6% 86% 14% 94%;
+            padding: 50px;
+        }
+
+        .dashChild.scale {
+            animation: scale 0.3s;
+        }
+
+        @keyframes scale {
+            0% {
+                scale: 1;
+            }
+
+            50% {
+                scale: 1.1;
+            }
+
+            100% {
+                scale: 1;
+            }
+        }
+
+        .closeDash {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+
+        .closeDash:hover {
+            color: #005780;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            outline: none;
+        }
+
+        #badge {
+            margin-top: 25px;
+        }
+
+        select {
+            padding: 8px;
+            margin: 10px 0;
+            outline: none;
+        }
+
+        textarea {
+            height: 70px;
+            resize: none;
+            outline: none;
+            padding: 10px;
+        }
+
+        .up {
+            position: relative;
+            height: 30px;
+        }
+
+        .upload {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            z-index: 100;
+        }
+
+        .download {
+            position: absolute;
+            top: 0px;
+            left: 0;
+            width: 200px;
+            margin-left: 10px;
+        }
+
+        input[type="date"] {
+            padding: 15px 10px;
+            margin: 8px 0;
+        }
+
+        .dateParent {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        #trashContainer {
+            width: 30%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0px;
+            display: none;
+            background-color: #00000080;
+            z-index: 200000000;
+        }
+
+        #archiveContainer {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0px;
+            display: none;
+            background-color: #00000034;
+            z-index: 200000000;
+
+        }
+
+        #trashContainer.keyShow,
+        #archiveContainer.keyShow {
+            display: block;
+            animation: keyshow .5s;
+        }
+
+        @keyframes keyshow {
+            0% {
+                right: -600px;
+            }
+
+            50% {
+                right: 50px;
+            }
+
+            100% {
+                right: 0px;
+            }
+        }
+
+        #trashContainer .closeTrash,
+        #archiveContainer .closeArchive {
+            color: white;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            transition: all .5s;
+            cursor: pointer;
+        }
+
+        #trashContainer .closeTrash:hover,
+        #archiveContainer .closeArchive:hover {
+            color: #6495ed;
+        }
+
+        .trashChild,
+        .archiveChild {
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 200000000;
+
+
+        }
+
+        .archiveChild {
+            background: linear-gradient(to right, #232526, #414345);
+        }
+
+        .trashChild .usersTrash,
+        .usersArchive {
+            position: absolute;
+            bottom: 0;
+            right: -10%;
+            overflow: scroll;
+            height: 80%;
+            width: 90%;
+            padding-bottom: 50px;
+        }
+
+        .usersArchive {
+            display: flex;
+            flex-wrap: wrap;
+            left: 10%;
+            height: 80%;
+            width: 80%;
+            /* background-color: yellow; */
+            gap: 25px;
+
+        }
+
+        .usersTrash::-webkit-scrollbar,
+        .usersArchive::-webkit-scrollbar {
+            display: none;
+        }
+
+        .titleTrash,
+        .titleArchive {
+            position: absolute;
+            top: 10px;
+            left: 150px;
+            font-size: 30px;
+            color: #a09e9e;
+        }
+
+        .restore {
+            background-color: green !important;
+        }
+
+        .deleted {
+            background-color: red !important;
+        }
+
+        .unarchive {
+            background-color: yellow !important;
+        }
+
+        .usernameParent {
+            display: flex;
+
+        }
+
+        .username,
+        .aro {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 300;
+            color: gray;
+
+        }
+
+        #edit {
+            background-color: #005780;
+            margin-top: 10px;
+
+            /* color: #232526; */
+        }
+
+        .filterDetails select {
+            /* appearance: none; */
+            border: none;
+            background-color: #6495ed;
+            color: white;
+            font-size: 18px;
+            margin: 0 10px;
+            padding: 10px;
+        }
+
+        .filterDetails select.colory {
+            background-color: orangered;
+        }
+
+        .filterDetails select option {
+            margin: 5px 0;
+
+        }
+
+        .cottage {
+            font-size: 40px;
+            transition: all .5s;
+            cursor: pointer;
+        }
+
+        .cottage:hover {
+            color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <button class="add">Add User</button>
+            <span class="material-symbols-outlined cottage">
+                cottage
+            </span>
+            <!-- dash container -->
+            <div class="dash noon">
+                <div class="dashChild">
+                    <form action="">
+                        <span class="material-symbols-outlined closeDash">
+                            close
+                        </span>
+                        <input required type="text" name="" class="firstname" placeholder="firstname" id="">
+                        <input required type="text" name="" class="lastname" placeholder="lastname" id="">
+                        <input required type="text" name="" class="username" placeholder="@username" id="">
+                        <!-- <input type="date" class="HowDate" name="" id=""> -->
+                        <div class="up">
+                            <span class="material-symbols-outlined download">
+                                file_download
+                            </span>
+                            <input required type="file" onchange="onFileSelected(event)" class="upload" name="" id="">
+                        </div>
+                        <select required name="badge" id="badge">
+                            <option value="">badge</option>
+                            <option value="gold">gold</option>
+                            <option value="silver">silver</option>
+                            <option value="bronze">bronze</option>
+                        </select>
+                        <select required name="job" id="job">
+                            <option value="">Job</option>
+                            <option value="frontend developer">frontend developer</option>
+                            <option value="backend developer">backend developer</option>
+                            <option value="database engineer">Database engineer</option>
+
+                        </select>
+
+                        <textarea required name="" id="" cols="30" rows="10">beatae aperiam cupiditate?
+                            Facere nulla dolorum in ut voluptatum deleniti sapiente
+                            voluptas quam assumenda.</textarea>
+
+                        <input type="submit" value="Submit" id="submit">
+                        <button id="edit" class="noon">Edit</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="trashArchives">
+                <button class="archives"><span class="material-symbols-outlined archives">
+                        archive
+                    </span></button>
+                <!-- archive container !!!!!!!!-->
+                <div id="archiveContainer">
+                    <div class="archiveChild">
+                        <span class="material-symbols-outlined closeArchive">
+                            close
+                        </span>
+                        <p class="titleArchive">Archive</p>
+                        <div class="usersArchive">
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <button class="trash"><span class="material-symbols-outlined">
+                        delete
+                    </span></button>
+                <!-- trash container !!!!!!!! -->
+                <div id="trashContainer">
+                    <div class="trashChild">
+                        <span class="material-symbols-outlined closeTrash">
+                            close
+                        </span>
+                        <p class="titleTrash">Trash</p>
+                        <div class="usersTrash">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="filter">
+        <div class="container">
+            <span class="material-symbols-outlined tune">
+                tune
+            </span>
+            <ul class="filterDetails noon">
+
+                <select onchange="filterJobBadge(0)" name="" id="badgeFilter">
+                    <option value="">badge</option>
+                    <option value="gold">gold</option>
+                    <option value="silver">silver</option>
+                    <option value="bronze">bronse</option>
+                </select>
+                <select onchange="filterDate()" name="" id="dateFilter">
+                    <option value="">Date</option>
+                    <option value="Old to new">Old to new</option>
+                    <option value="New to old">New to old</option>
+                </select>
+
+                <select onchange="filterJobBadge(1)" name="" id="jobFilter">
+                    <option value="">Job</option>
+                    <option value="frontend developer">frontend developer</option>
+                    <option value="backend developer">backend developer</option>
+                    <option value="database engineer">database Engineer</option>
+                </select>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <div class="users">
+
+
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let tune = document.querySelector(".tune");
+        let filter = document.querySelector(".filterDetails");
+        let firstname = document.querySelector(".firstname");
+        let lastname = document.querySelector(".lastname");
+        let username = document.querySelector(".username");
+        let upload = document.querySelector(".upload");
+        let download = document.querySelector(".download");
+        let badge = document.querySelector("#badge");
+        let job = document.querySelector("#job");
+        let textarea = document.querySelector("textarea");
+        let submit = document.querySelector("#submit");
+        let closeDash = document.querySelector(".closeDash");
+        let dash = document.querySelector(".dash");
+        let addUserBtn = document.querySelector(".add");
+        let dashChild = document.querySelector(".dashChild");
+        let users = document.querySelector(".users");
+        let trashbtn = document.querySelector(".trash");
+        let trashContainer = document.querySelector("#trashContainer");
+        let closeTrash = document.querySelector(".closeTrash");
+        let usersTrash = document.querySelector(".usersTrash");
+        let archivehbtn = document.querySelector(".archives");
+        let archiveContainer = document.querySelector("#archiveContainer");
+        let closearchive = document.querySelector(".closeArchive");
+        let usersarchive = document.querySelector(".usersArchive");
+        let editBtn = document.querySelector("#edit");
+        let cottage = document.querySelector(".cottage");
+        let badgeFilter = document.querySelector("#badgeFilter");
+        let jobFilter = document.querySelector("#jobFilter");
+        let dateFiler = document.querySelector("#dateFilter");
+
+        let mysrc;
+        let indItem;
+        let myObjArray = [];
+
+        let datArray;
+        let datArray2;
+
+        // let date = dat.getUTCFullYear() + "-" + dat.getUTCDay() + "-" + dat.getUTCMonth()
+        // console.log(dat);
+        // window.localStorage.clear();
+        cottage.addEventListener("click", createObject);
+        // localstorage
+        if (window.localStorage.getItem("myObjArray")) {
+            myStorDAta = JSON.parse(window.localStorage.getItem("myObjArray"));
+            myObjArray = myStorDAta;
+            datArray = myStorDAta;
+            datArray2 = myStorDAta;
+            createObject();
+        }
+
+        // NOTE:  events  click |||||||||||
+
+        addUserBtn.addEventListener("click", function () {
+            dash.classList.toggle("noon");
+            dashChild.classList.add("scale");
+        });
+        closeDash.addEventListener("click", function () {
+            dash.classList.toggle("noon");
+            dashChild.classList.remove("scale");
+        });
+        tune.addEventListener("click", function () {
+            filter.classList.toggle("noon");
+        });
+        trashbtn.addEventListener("click", function () {
+            trashContainer.classList.toggle("keyShow");
+        });
+        closeTrash.addEventListener("click", function () {
+            trashContainer.classList.toggle("keyShow");
+        });
+        archivehbtn.addEventListener("click", function () {
+            archiveContainer.classList.toggle("keyShow");
+        });
+        closearchive.addEventListener("click", function () {
+            archiveContainer.classList.toggle("keyShow");
+        });
+
+        //  !!!!!!!!  function to get image src
+
+        function onFileSelected(event) {
+            mysrc = event.path[0].files[0].name;
+            download.style.color = "green";
+
+            return mysrc;
+        }
+
+        // submit event listener !!!!!!!! and crea
+
+
+
+        let testname = /[^a-zA-Z]/
+
+
+        submit.addEventListener("click", function (e) {
+            indItem++;
+            e.preventDefault();
+            let dat = new Date().toLocaleString();
+
+            window.localStorage.clear();
+            let obj = {
+                uploadVAlue: upload.value,
+                stName: firstname.value,
+                stname: lastname.value,
+                userName: username.value,
+                date: dat,
+                img: mysrc,
+                badge: badge.value,
+                job: job.value,
+                textarea: textarea.value,
+                l7ala: "",
+            };
+            let testName = testname.test(firstname.value)
+            let testLast = testname.test(lastname.value)
+            let usernm = testname.test(username.value)
+            if (
+                firstname.value &&
+                !testName &&
+                !testLast &&
+                !usernm &&
+                lastname.value &&
+                username.value &&
+                upload.value &&
+                job.value &&
+                badge.value
+            ) {
+                myObjArray.push(obj);
+                window.localStorage.setItem("myObjArray", JSON.stringify(myObjArray));
+                createObject();
+                // viderInput()
+                dash.classList.toggle("noon");
+            }
+        });
+
+        function viderInput() {
+            firstname.value = "";
+            lastname.value = "";
+            username.value = "";
+            upload.value = "";
+            username.value = "";
+
+            badge.value = "";
+            job.value = "";
+            download.style.color = "black";
+        }
+
+        function createObject() {
+            users.innerHTML = "";
+            usersTrash.innerHTML = "";
+            usersarchive.innerHTML = "";
+            myObjArray.forEach((el, ind) => {
+                if (el.l7ala === "") {
+                    users.innerHTML += `
+     <div id="${el.i} " class="user">
+                    <div class="profile">
+                        <img src="img/${el.img} " alt="">
+                        <div class="profDesc">
+                            <div class="name">
+                                <p class="lastName">${el.stName}</p>
+                                <p class="firstName"> ${el.stname} </p>
+                                
+                                
+                                </div>
+                                <div class="usernameParent"><span class="aro">@</span><p class="username" >${el.userName}</p></div>
+                            <p class="kind">${el.badge}</p>
+                            
+                        </div>
+                    </div>
+                    <div class="description">
+                    <div class="dateParent">
+                                <p> <p class="date">${el.date} </p>  </p>
+                            </div>
+                        <p class="kindOfWork">${el.job}</p>
+                        <p class="descPara">${el.textarea}</p>
+
+                        <div class="buttons">
+                            <span onclick="deletItems(${ind})" title="delete" class="material-symbols-outlined delete">
+                                delete
+                            </span>
+                            <span onclick="addToArchive(${ind})"  title="archive" class="material-symbols-outlined archive">
+                                archive
+                            </span>
+                            <span onclick="editButon(${ind})" title="edit" class="material-symbols-outlined edit">
+                                edit
+                            </span>
+                            
+                        </div>
+                    </div>
+                </div>
+    `;
+                } else if (el.l7ala === "deleted") {
+                    usersTrash.innerHTML += `
+    <div class="user">
+                   <div class="profile">
+                       <img src="img/${el.img} " alt="">
+                       <div class="profDesc">
+                           <div class="name">
+                               <p class="lastName">${el.stName}</p>
+                               <p class="firstName"> ${el.stname} </p>
+
+                           </div>
+                           <p class="kind">${el.badge}</p>
+                           
+                       </div>
+                   </div>
+                   <div class="description">
+                   <div class="dateParent">
+                               <p><span>Get the job in:</span> <p class="date">${el.date} </p>  </p>
+                           </div>
+                       <p class="kindOfWork">${el.job}</p>
+                       <p class="descPara">${el.textarea}</p>
+
+                       <div class="buttons">
+                       <span  onclick="deleteItemEver(${ind})" title="delete ever" class="material-symbols-outlined">
+                        person_remove
+                        </span>
+                           
+                           <span  onclick="restoreItems(${ind})" title="restore" class="material-symbols-outlined restore">
+                              restore_from_trash
+                          </span>
+                           
+                           
+                       </div>
+                   </div>
+               </div>
+   `;
+                } else if (el.l7ala === "archive") {
+                    usersarchive.innerHTML += `
+    <div class="user">
+                   <div class="profile">
+                       <img src="img/${el.img} " alt="">
+                       <div class="profDesc">
+                           <div class="name">
+                               <p class="lastName">${el.stName}</p>
+                               <p class="firstName"> ${el.stname} </p>
+
+                           </div>
+                           <p class="kind">${el.badge}</p>
+                           
+                       </div>
+                   </div>
+                   <div class="description">
+                   <div class="dateParent">
+                               <p><span>Get the job in:</span> <p class="date">${el.date} </p>  </p>
+                           </div>
+                       <p class="kindOfWork">${el.job}</p>
+                       <p class="descPara">${el.textarea}</p>
+
+                       <div class="buttons">
+                       
+                           <span  onclick="restoreItems(${ind})" class="material-symbols-outlined unarchive">
+                            unarchive
+                            </span>
+                           
+                           
+                           
+                       </div>
+                   </div>
+               </div>
+   `;
+                }
+            });
+        }
+
+        // deleteItems functions
+
+        function deletItems(i) {
+            window.localStorage.clear();
+            myObjArray[i].l7ala = "deleted";
+            window.localStorage.setItem("myObjArray", JSON.stringify(myObjArray));
+            createObject();
+        }
+        // add to archive functions
+
+        function addToArchive(i) {
+            window.localStorage.clear();
+            myObjArray[i].l7ala = "archive";
+            window.localStorage.setItem("myObjArray", JSON.stringify(myObjArray));
+            createObject();
+        }
+
+        // restore items from trash
+
+        function restoreItems(i) {
+            window.localStorage.clear();
+            myObjArray[i].l7ala = "";
+            window.localStorage.setItem("myObjArray", JSON.stringify(myObjArray));
+            createObject();
+        }
+
+        function deleteItemEver(i) {
+            window.localStorage.clear();
+            myObjArray.splice(i, 1);
+            window.localStorage.setItem("myObjArray", JSON.stringify(myObjArray));
+            createObject();
+        }
+
+        // edit  buttons
+
+        function editButon(i) {
+            submit.classList.toggle("noon");
+            editBtn.classList.toggle("noon");
+
+            indItem = i;
+            dash.classList.toggle("noon");
+            dashChild.classList.add("scale");
+            window.localStorage.clear();
+            firstname.value = myObjArray[i].stName;
+            lastname.value = myObjArray[i].stname;
+            username.value = myObjArray[i].userName;
+            badge.value = myObjArray[i].badge;
+            job.value = myObjArray[i].job;
+        }
+        editBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            dash.classList.toggle("noon");
+            dashChild.classList.add("scale");
+            changeInfo(indItem);
+            window.localStorage.setItem("myObjArray", JSON.stringify(myObjArray));
+            createObject();
+            viderInput();
+            submit.classList.toggle("noon");
+            editBtn.classList.toggle("noon");
+        });
+        function changeInfo(i) {
+            myObjArray[i].stName = firstname.value;
+            myObjArray[i].stname = lastname.value;
+            myObjArray[i].userName = username.value;
+
+            myObjArray[i].img = myObjArray[i].img;
+            myObjArray[i].badge = badge.value;
+            myObjArray[i].job = job.value;
+        }
+
+        // window.localStorage.clear();
+
+        function filterJobBadge(e) {
+            users.innerHTML = "";
+
+            myObjArray.forEach((el, ind) => {
+                if (el.badge === badgeFilter.value) {
+                    users.innerHTML += `
+     <div id="${el.i} " class="user">
+                    <div class="profile">
+                        <img src="img/${el.img} " alt="">
+                        <div class="profDesc">
+                            <div class="name">
+                                <p class="lastName">${el.stName}</p>
+                                <p class="firstName"> ${el.stname} </p>
+                                
+                                
+                                </div>
+                                <div class="usernameParent"><span class="aro">@</span><p class="username" >${el.userName}</p></div>
+                            <p class="kind">${el.badge}</p>
+                            
+                        </div>
+                    </div>
+                    <div class="description">
+                    <div class="dateParent">
+                                <p> <p class="date">${el.date} </p>  </p>
+                            </div>
+                        <p class="kindOfWork">${el.job}</p>
+                        <p class="descPara">${el.textarea}</p>
+
+                        <div class="buttons">
+                            <span onclick="deletItems(${ind})" title="delete" class="material-symbols-outlined delete">
+                                delete
+                            </span>
+                            <span onclick="addToArchive(${ind})"  title="archive" class="material-symbols-outlined archive">
+                                archive
+                            </span>
+                            <span onclick="editButon(${ind})" title="edit" class="material-symbols-outlined edit">
+                                edit
+                            </span>
+                            
+                        </div>
+                    </div>
+                </div>
+    `;
+                } else if (el.job == jobFilter.value) {
+                    users.innerHTML += `
+     <div id="${el.i} " class="user">
+                    <div class="profile">
+                        <img src="img/${el.img} " alt="">
+                        <div class="profDesc">
+                            <div class="name">
+                                <p class="lastName">${el.stName}</p>
+                                <p class="firstName"> ${el.stname} </p>
+                                
+                                
+                                </div>
+                                <div class="usernameParent"><span class="aro">@</span><p class="username" >${el.userName}</p></div>
+                            <p class="kind">${el.badge}</p>
+                            
+                        </div>
+                    </div>
+                    <div class="description">
+                    <div class="dateParent">
+                                <p> <p class="date">${el.date} </p>  </p>
+                            </div>
+                        <p class="kindOfWork">${el.job}</p>
+                        <p class="descPara">${el.textarea}</p>
+
+                        <div class="buttons">
+                            <span onclick="deletItems(${ind})" title="delete" class="material-symbols-outlined delete">
+                                delete
+                            </span>
+                            <span onclick="addToArchive(${ind})"  title="archive" class="material-symbols-outlined archive">
+                                archive
+                            </span>
+                            <span onclick="editButon(${ind})" title="edit" class="material-symbols-outlined edit">
+                                edit
+                            </span>
+                            
+                        </div>
+                    </div>
+                </div>
+    `;
+                }
+            });
+        }
+        badgeFilter.addEventListener("change", function () {
+            badgeFilter.classList.add("colory");
+            jobFilter.classList.remove("colory");
+            dateFiler.classList.remove("colory");
+            jobFilter.value = "";
+            dateFiler.value = "";
+        });
+        jobFilter.addEventListener("change", function () {
+            jobFilter.classList.add("colory");
+            badgeFilter.classList.remove("colory");
+            dateFiler.classList.remove("colory");
+            badgeFilter.value = "";
+            dateFiler.value = "";
+        });
+        dateFiler.addEventListener("change", function () {
+            dateFiler.classList.add("colory");
+            jobFilter.classList.remove("colory");
+            badgeFilter.classList.remove("colory");
+            jobFilter.value = "";
+            badgeFilter.value = "";
+        });
+        function filterDate() {
+            if (dateFiler.value == "Old to new") {
+                myObjArray.sort(sortFunctionOld);
+                createObject();
+            } else if (dateFiler.value == "New to old") {
+                myObjArray.sort(sortFunctionNew);
+                createObject();
+            }
+        }
+
+        // methods to sort obj json by date
+
+        function sortFunctionOld(a, b) {
+            var dateA = new Date(a.date).getTime();
+            var dateB = new Date(b.date).getTime();
+            return dateA > dateB ? 1 : -1;
+        }
+        function sortFunctionNew(a, b) {
+            console.log("new");
+            var dateA = new Date(a.date).getTime();
+            var dateB = new Date(b.date).getTime();
+            return dateA < dateB ? 1 : -1;
+        }
+
+        cottage.addEventListener("click", function () {
+            location.reload()
+        })
+    </script>
+</body>
+
+</html>
